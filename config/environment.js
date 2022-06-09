@@ -4,7 +4,7 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'task2',
     environment,
-    rootURL: '/',
+    rootURL: '/Task2/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
