@@ -1,0 +1,101 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Harry Potter and the Prisoner of Azkaban",
+      "author": "Joan Rowling",
+      "pages": 317,
+      "coverURL": "https://images-na.ssl-images-amazon.com/images/I/81EbEWM54ML.jpg",
+      "tags": [
+        "Fantasy",
+        "Adventure",
+        "Family"
+      ],
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "title": "Lord of the Rings: The Return of the King",
+      "author": "John Tolkien",
+      "pages": 416,
+      "coverURL": "https://images-na.ssl-images-amazon.com/images/I/61YLlCTnWtL.jpg",
+      "tags": [
+        "Fantasy",
+        "Adventure",
+        "Drama"
+      ],
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "title": "A Storm of Swords",
+      "author": "George Martin",
+      "pages": 973,
+      "coverURL": "https://main-cdn.sbermegamarket.ru/hlr-system/1723276916/100022939386b0.jpg",
+      "tags": [
+        "Fantasy"
+      ],
+      "userId": 1
+    },
+    {
+      "id": 4,
+      "title": "The Twelve Chairs",
+      "author": "Ilya Ilf, Evgeny Petrov",
+      "pages": 344,
+      "coverURL": "https://фантазеры.рф/wa-data/public/shop/products/05/35/13505/images/37704/37704.750x0.jpg",
+      "tags": [
+        "Prose",
+        "Soviet literature"
+      ],
+      "userId": 1
+    },
+    {
+      "id": 5,
+      "title": "The Witcher Sword of Destiny",
+      "author": "Andrzej Sapkowski",
+      "pages": 384,
+      "coverURL": "",
+      "tags": [
+        "Fantasy"
+      ],
+      "userId": 1
+    }
+  ],
+  "speakers": [
+    {
+      "id": 1,
+      "name": "Charles",
+      "surname": "Ethan",
+      "patronymic": "Powell",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "name": "Evan",
+      "surname": "Bryan",
+      "patronymic": "Moore",
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "name": "Alex",
+      "surname": "Ethan",
+      "patronymic": "Griffin",
+      "userId": 1
+    },
+    {
+      "id": 4,
+      "name": "Joshua",
+      "surname": "Luke",
+      "patronymic": "Ramirez",
+      "userId": 1
+    },
+    {
+      "id": 5,
+      "name": "Jose",
+      "surname": "Gabriel",
+      "patronymic": "Gonzales",
+      "userId": 1
+    }
+  ]
+}
