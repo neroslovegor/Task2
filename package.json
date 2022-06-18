@@ -15,7 +15,7 @@
     "lint:js": "eslint ./*.js app blueprints config lib server tests",
     "start": "ember serve",
     "test": "ember test",
-    "json-server": "json-server --watch db.json"
+    "json-server": "json-server -w tests/test-data/db.json"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
@@ -44,11 +44,11 @@
     "ember-source": "~3.1.0",
     "ember-welcome-page": "^3.0.0",
     "eslint-plugin-ember": "^5.0.0",
-    "json-server": "^0.17.0",
     "loader.js": "^4.2.3",
     "sass": "^1.52.3"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
-  }
+  },
+  "dependencies": {}
 }

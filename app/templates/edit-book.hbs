@@ -1,0 +1,7 @@
+<div class="container h-100">
+  <div class="htop">
+    <h2 class="text-center">Редактирование книги: {{ model.title }}</h2>
+    <!-- {{book-form actionSaveBook=(action "saveBook") book=model}} -->
+    {{book-form book=model onsubmit=(action "saveBook")}}
+  </div>
+</div>

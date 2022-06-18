@@ -19,6 +19,7 @@
       "author": "John Tolkien",
       "pages": 416,
       "coverURL": "https://images-na.ssl-images-amazon.com/images/I/61YLlCTnWtL.jpg",
+      "descripURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "tags": [
         "Fantasy",
         "Adventure",
@@ -32,6 +33,7 @@
       "author": "George Martin",
       "pages": 973,
       "coverURL": "https://main-cdn.sbermegamarket.ru/hlr-system/1723276916/100022939386b0.jpg",
+      "descripURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "tags": [
         "Fantasy"
       ],
@@ -43,6 +45,7 @@
       "author": "Ilya Ilf, Evgeny Petrov",
       "pages": 344,
       "coverURL": "https://фантазеры.рф/wa-data/public/shop/products/05/35/13505/images/37704/37704.750x0.jpg",
+      "descripURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "tags": [
         "Prose",
         "Soviet literature"
@@ -55,6 +58,19 @@
       "author": "Andrzej Sapkowski",
       "pages": 384,
       "coverURL": "",
+      "descripURL": "",
+      "tags": [
+        "Fantasy"
+      ],
+      "userId": 1
+    },
+    {
+      "id": 6,
+      "title": "The Witcher Sword of Destiny",
+      "author": "Andrzej Sapkowski",
+      "pages": 384,
+      "coverURL": "",
+      "descripURL": "",
       "tags": [
         "Fantasy"
       ],
@@ -64,37 +80,37 @@
   "speakers": [
     {
       "id": 1,
-      "name": "Charles",
-      "surname": "Ethan",
-      "patronymic": "Powell",
+      "firstName": "Charles",
+      "middleName": "Ethan",
+      "lastName": "Powell",
       "userId": 1
     },
     {
       "id": 2,
-      "name": "Evan",
-      "surname": "Bryan",
-      "patronymic": "Moore",
+      "firstName": "Evan",
+      "middleName": "Bryan",
+      "lastName": "Moore",
       "userId": 1
     },
     {
       "id": 3,
-      "name": "Alex",
-      "surname": "Ethan",
-      "patronymic": "Griffin",
+      "firstName": "Alex",
+      "middleName": "Ethan",
+      "lastName": "Griffin",
       "userId": 1
     },
     {
       "id": 4,
-      "name": "Joshua",
-      "surname": "Luke",
-      "patronymic": "Ramirez",
+      "firstName": "Joshua",
+      "middleName": "Luke",
+      "lastName": "Ramirez",
       "userId": 1
     },
     {
       "id": 5,
-      "name": "Jose",
-      "surname": "Gabriel",
-      "patronymic": "Gonzales",
+      "firstName": "Jose",
+      "middleName": "Gabriel",
+      "lastName": "Gonzales",
       "userId": 1
     }
   ]

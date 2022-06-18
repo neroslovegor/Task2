@@ -1,0 +1,27 @@
+<div class="container h-100">
+  <div class="htop">
+    <h2 class="text-center">Спикеры</h2>
+    <div class="form-row navbar-panel justify-content-between">
+      <div class="col-md-auto">
+        {{#link-to "create-speaker"}} 
+          <button class="btn btn-outline-primary my-2" type="button" title="Добавить спикера">
+            <svg viewBox="0 0 16 16" class="bi bi-plus card-button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+          </button>
+        {{/link-to}}
+      </div>
+      <div class="col-md-auto">
+        <form class="form-inline">
+          <input class="form-control mr-2 search-long search-only" type="search" placeholder="ФИО" aria-label="Спикер">
+          <button class="btn btn-primary my-2" type="submit">Найти</button>
+        </form>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3">
+      {{#each model as |speaker|}}
+        {{speaker-item idSpeaker=speaker.id firstName=speaker.firstName middleName=speaker.middleName lastName=speaker.lastName}}
+      {{/each}}
+    </div>
+  </div>
+</div>
