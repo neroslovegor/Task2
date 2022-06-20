@@ -34,11 +34,7 @@
     <div class="card-footer">
       <div class="row">
         <div class="col">
-          {{#if book.descripURL}}
-            <a href={{book.descripURL}} class="card-link line-offset">Описание</a>
-          {{else}}
-            <a href="" class="card-link line-offset">Описание</a>
-          {{/if}}
+          <a href={{book.descripURL}} class="card-link line-offset">Описание</a>
         </div>
         <div class="col text-right">
           {{#link-to "edit-book" book.id class="btn btn-edit"}} 

@@ -13,14 +13,14 @@
       </div>
       <div class="col-md-auto">
         <form class="form-inline">
-          <input class="form-control mr-2 search-long search-only" type="search" placeholder="ФИО" aria-label="Спикер">
-          <button class="btn btn-primary my-2" type="submit">Найти</button>
+          {{input type="search" class="form-control mr-2 search-long search-only" placeholder="ФИО" aria-label="Спикер" value=search}}
+          <button class="btn btn-primary my-2" type="button" onclick={{action "searchUpdate"}}>Найти</button>
         </form>
       </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3">
       {{#each model as |speaker|}}
-        {{speaker-item idSpeaker=speaker.id firstName=speaker.firstName middleName=speaker.middleName lastName=speaker.lastName}}
+        {{speaker-item actionDeleteSpeaker=(action "deleteSpeaker") speaker=speaker}}
       {{/each}}
     </div>
   </div>

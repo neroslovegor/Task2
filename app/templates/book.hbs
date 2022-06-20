@@ -13,14 +13,14 @@
       </div>
       <div class="col-md-auto">
         <form class="form-inline">
-          {{input type="text" class="form-control mr-2 search-long" placeholder="Найти по полям" aria-label="Найти по полям" value=search}}
-          <button class="btn btn-primary my-2" type="submit">Найти</button>
+          {{input type="search" class="form-control mr-2 search-long" placeholder="Найти по полям" aria-label="Найти по полям" value=search}}
+          <button class="btn btn-primary my-2" type="button" onclick={{action "searchUpdate"}}>Найти</button>
         </form>
       </div>
       <div class="col-md-auto">
         <form class="form-inline">
-          {{input type="text" class="form-control mr-2" placeholder="Поиск по тегам" aria-label="Найти по тегам" value=search_by_tag}}
-          <button class="btn btn-primary my-2" type="submit">Поиск</button>
+          {{input type="search" class="form-control mr-2" placeholder="Поиск по тегам" aria-label="Найти по тегам" value=tags_like}}
+          <button class="btn btn-primary my-2" type="button" onclick={{action "searchUpdate"}}>Поиск</button>
         </form>
       </div>
     </div>

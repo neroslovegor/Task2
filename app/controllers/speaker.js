@@ -2,15 +2,14 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-  queryParams: ["search", "tags_like"],
+  queryParams: ["search"],
   search: '',
-  tags_like: '',
-  
+
   dataService: service('data'),
   actions: {
-    async deleteBook(id) {
+    async deleteSpeaker(id) {
       try {
-        await this.get('dataService').deleteBook(id);
+        await this.get('dataService').deleteSpeaker(id);
         this.send("sessionChanged");
       } catch (error) {
         this.send('error', new Error('Connection failed'));
@@ -18,9 +17,7 @@ export default Controller.extend({
     },
 
     searchUpdate() {
-      this.send("sessionChanged");
-      // this.set('search', this.get('search'));
-      // this.set('tags_like', this.get('tags_like'));   
+      this.send("sessionChanged");   
     },
   }
 });

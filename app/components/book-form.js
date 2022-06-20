@@ -7,27 +7,37 @@ export default Component.extend({
 
       this.onsubmit({
         id: this.get('idBook'),
-        title: this.get('author.firstName'),
-        author: this.get('author.lastName'),
-        pages: this.get('author.lastName'),
-        coverURL: this.get('author.lastName'),
-        descripURL: this.get('author.lastName'),
-        tags: this.get('author.lastName')
+        title: this.get('title'),
+        author: this.get('author'),
+        pages: this.get('pages'),
+        coverURL: this.get('coverURL'),
+        descripURL: this.get('descripURL'),
+        tags: this.get('tags')
       });
-    }
+    },
+
+    changeTags(newTags) {
+      set(this, 'tags', [...newTags]);
+
+      // eslint-disable-next-line no-console
+      console.log(get(this, 'tags'));
+    },
+    changeUploadData(uploadData) {
+      set(this, 'uploadData', uploadData);
+    },
   },
 
   didReceiveAttrs() {
     this._super(...arguments);
 
     this.setProperties({
-      idBook: this.get('author.id') ? this.get('author.id') : undefined,
-      title: this.get('author.firstName'),
-      author: this.get('author.lastName'),
-      pages: this.get('author.lastName'),
-      coverURL: this.get('author.lastName'),
-      descripURL: this.get('author.lastName'),
-      tags: this.get('author.lastName')
+      idBook: this.get('book.id') ? this.get('book.id') : undefined,
+      title: this.get('book.title'),
+      author: this.get('book.author'),
+      pages: this.get('book.pages'),
+      coverURL: this.get('book.coverURL'),
+      descripURL: this.get('book.descripURL'),
+      tags: this.get('book.tags')
     });
   },
 });

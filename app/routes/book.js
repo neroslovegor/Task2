@@ -6,15 +6,15 @@ export default Route.extend({
     search: {
       refreshModel: false
     },
-    search_by_tag: {
+    tags_like: {
       refreshModel: false
     }
   },
 
   dataService: service('data'),
-  model({ search, search_by_tag }) {
-    if (search || search_by_tag) {
-      return this.get('dataService').getBooks(search);
+  model({ search, tags_like }) {
+    if (search || tags_like) {
+      return this.get('dataService').getBooks(search, tags_like);
     }
     return this.get('dataService').getBooks();
   },
@@ -22,6 +22,10 @@ export default Route.extend({
   actions: {
     sessionChanged: function() {
       this.refresh();
+    },
+    
+    loading() {
+      return false;
     }
   }
 });

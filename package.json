@@ -20,7 +20,9 @@
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
     "bootstrap": "^4.6.1",
+    "broccoli": "^3.5.2",
     "broccoli-asset-rev": "^2.4.5",
+    "broccoli-funnel": "^3.0.8",
     "ember-ajax": "^3.0.0",
     "ember-bootstrap": "^3.1.4",
     "ember-cli": "~3.1.4",
@@ -50,5 +52,8 @@
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
   },
-  "dependencies": {}
+  "dependencies": {
+    "blueimp-file-upload": "^10.32.0",
+    "json-server": "^0.16.0"
+  }
 }

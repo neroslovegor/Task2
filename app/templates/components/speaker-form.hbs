@@ -1,26 +1,26 @@
-<form class="edit-form">
+<form class="edit-form" onsubmit={{action "submitForm"}}>
   <div class="form-group row">
     <label for="inputSurname" class="col-sm-2 col-form-label text-right">Фамилия</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control form-control-lg" id="inputSurname" placeholder="Введите фамилию" value="{{speaker.lastName}}">
+      {{input type="text" class="form-control form-control-lg" placeholder="Введите фамилию" value=lastName}}
     </div>
   </div>
   <div class="form-group row">
     <label for="inputName" class="col-sm-2 col-form-label text-right">Имя</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control form-control-lg" id="inputName" placeholder="Введите имя" value="{{speaker.firstName}}">
+      {{input type="text" class="form-control form-control-lg" placeholder="Введите имя" value=firstName}}
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPatronymic" class="col-sm-2 col-form-label text-right big">Отчество</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control form-control-lg" id="inputPatronymic" placeholder="Введите отчество" value="{{speaker.middleName}}">
+      {{input type="text" class="form-control form-control-lg" placeholder="Введите отчество" value=middleName}}
     </div>
   </div>
   <div class="form-group row">
     <div class="col-12 text-right">
       <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
-      <button type="submit" class="btn btn-outline-secondary btn-lg">Отмена</button>
+      {{#link-to "speaker" class="btn btn-outline-secondary btn-lg" }}Отмена{{/link-to}}
     </div>
   </div>
 </form>
