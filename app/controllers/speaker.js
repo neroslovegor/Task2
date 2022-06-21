@@ -17,6 +17,7 @@ export default Controller.extend({
     },
 
     searchUpdate() {
+      this.set('search', this.get('searchValue'));
       this.send("sessionChanged");   
     },
   }

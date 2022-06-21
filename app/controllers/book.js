@@ -18,9 +18,9 @@ export default Controller.extend({
     },
 
     searchUpdate() {
+      this.set('search', this.get('searchValue'));
+      this.set('tags_like', this.get('searchTag'));
       this.send("sessionChanged");
-      // this.set('search', this.get('search'));
-      // this.set('tags_like', this.get('tags_like'));   
     },
   }
 });
