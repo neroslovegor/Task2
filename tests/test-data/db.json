@@ -81,31 +81,18 @@
       "lastName": "wed"
     },
     {
-      "title": "12313",
-      "author": "",
-      "pages": "",
-      "coverURL": "",
-      "descripURL": "",
-      "tags": [],
+      "title": "wdsfsdfs",
+      "author": "dsafdsaf",
+      "pages": "12",
+      "descripURL": "https://www.npmjs.com/package/fs",
+      "tags": [
+        "dssd",
+        "dsf",
+        "sdf",
+        "sda"
+      ],
+      "coverURL": "/uploads/KEYYxiswLiM-1655801217681.jpg",
       "id": 7
-    },
-    {
-      "title": "",
-      "author": "",
-      "pages": "",
-      "coverURL": "",
-      "descripURL": "",
-      "tags": [],
-      "id": 8
-    },
-    {
-      "title": "ыфва",
-      "author": "ыва",
-      "pages": "1",
-      "coverURL": "",
-      "descripURL": "",
-      "tags": [],
-      "id": 9
     }
   ],
   "speakers": [

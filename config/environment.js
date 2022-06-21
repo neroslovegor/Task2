@@ -24,6 +24,8 @@ module.exports = function(environment) {
     }
   };
 
+  ENV.fileUploadURL = ENV.backendURL + '/FileUpload';
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;

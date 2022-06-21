@@ -15,16 +15,6 @@ export default Component.extend({
         tags: this.get('tags')
       });
     },
-
-    changeTags(newTags) {
-      set(this, 'tags', [...newTags]);
-
-      // eslint-disable-next-line no-console
-      console.log(get(this, 'tags'));
-    },
-    changeUploadData(uploadData) {
-      set(this, 'uploadData', uploadData);
-    },
   },
 
   didReceiveAttrs() {
