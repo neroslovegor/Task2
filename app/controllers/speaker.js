@@ -7,9 +7,9 @@ export default Controller.extend({
 
   dataService: service('data'),
   actions: {
-    async deleteSpeaker(id) {
+    async deleteSpeaker(speaker) {
       try {
-        await this.get('dataService').deleteSpeaker(id);
+        await speaker.destroyRecord();
         this.send("sessionChanged");
       } catch (error) {
         this.send('error', new Error('Connection failed'));

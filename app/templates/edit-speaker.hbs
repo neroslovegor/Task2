@@ -1,6 +1,6 @@
 <div class="container h-100">
   <div class="htop">
     <h2 class="text-center">Редактирование спикера: {{model.firstName}} {{model.lastName}}</h2>
-      {{speaker-form onsubmit=(action "saveSpeaker") speaker=model}}
+      {{speaker-form speaker=model onsubmit=(action "updateSpeaker")}}
   </div>
 </div>

@@ -19,16 +19,16 @@ export default Controller.extend({
       //   coverURL: '',
       // }, uploadData);
 
-      let newBook  = this.get('store').createRecord('book', {
+      let newBook = this.get('store').createRecord('book', {
         title: this.get('title'),
         author: this.get('author'),
         pages: this.get('pages'),
         descripURL: this.get('descripURL'),
         tags: this.get('tags'),
-        coverURL: '',
+        coverURL: ''
       });
 
-      await newBook.save()
+      await newBook.save();
 
       set(this, 'isUploadingFile', false);
       this.transitionToRoute('book.index');

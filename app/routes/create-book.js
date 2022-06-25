@@ -6,6 +6,7 @@ export default Route.extend({
       this.refresh();
     }
   },
+  
   setupController(controller/*, model*/) {
     this._super(...arguments);
     controller.reset();
