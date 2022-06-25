@@ -10,7 +10,17 @@ export default Controller.extend({
 
       set(this, 'isUploadingFile', true);
       const uploadData = get(this, 'uploadData');
-      await this.get("dataService").updateBook({
+      // await this.get("dataService").updateBook({
+      //   id: this.get('id'),
+      //   title: this.get('title'),
+      //   author: this.get('author'),
+      //   pages: this.get('pages'),
+      //   descripURL: this.get('descripURL'),
+      //   tags: this.get('tags'),
+      //   coverURL: this.get('coverURL')
+      // }, uploadData);
+
+      this.get('model').setProperties({
         id: this.get('id'),
         title: this.get('title'),
         author: this.get('author'),
@@ -18,7 +28,9 @@ export default Controller.extend({
         descripURL: this.get('descripURL'),
         tags: this.get('tags'),
         coverURL: this.get('coverURL')
-      }, uploadData);
+      });
+      
+      await this.get('model').save();
 
       set(this, 'isUploadingFile', false);
       this.transitionToRoute('book.index');
@@ -26,14 +38,11 @@ export default Controller.extend({
     
     changeTags(newTags) {
       set(this, 'tags', [...newTags]);
-  
-      // eslint-disable-next-line no-console
-      console.log(get(this, 'tags'));
     },
   
     changeUploadData(uploadData) {
       set(this, 'uploadData', uploadData);
-    },
+    }
   },
 
   reset() {

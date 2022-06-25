@@ -1,16 +1,24 @@
 /* eslint-disable no-console */
+// eslint-disable-next-line no-undef
 const jsonServer = require('json-server')
+// eslint-disable-next-line no-undef
 const path = require('path');
+// eslint-disable-next-line no-undef
 const multer = require('multer');
+// eslint-disable-next-line no-undef
 const fs = require("fs");
+// eslint-disable-next-line no-undef
 const jwt = require("jsonwebtoken");
+// eslint-disable-next-line no-undef
 const crypto = require('crypto');
-
+const server = jsonServer.create()
+const router = jsonServer.router('./tests/test-data/db.json')
+const middlewares = jsonServer.defaults()
 const secretKey = '09f26e402586e2faa8da4c98a35f1b20d6b033c6097befa8be3486a829587ve2f90a832bd3ff9d42710a4da095a2ce6h5b009f0c3730cd9b8e1af3eb84df6611';
 const hashingSecret = "l529b09fc50c";
 
 const pathToSave = 'public/uploads';
-const urlBase = '/uploads/';
+const urlBase = '/public/';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if (!fs.existsSync(path.join(__dirname, pathToSave))) {
@@ -54,10 +62,6 @@ const getError = (title, detail, status, pathToAttribute) => {
 
   return getErrors(errors);
 };
-
-const server = jsonServer.create()
-const router = jsonServer.router('./tests/test-data/db.json')
-const middlewares = jsonServer.defaults()
 
 //const getUnauthorizedError = () => getError('Login', 'You are not authorized, please log in', 401, null);
 // const getForbiddenError = () => getError('Forbidden', 'You don\'t have permissions to this resource', 403, null);
@@ -120,14 +124,7 @@ server.post('/token', function (req, res) {
   }
 });
 
-// Set default middlewares (logger, static, cors and no-cache)
-server.use(middlewares)
-
-// To handle POST, PUT and PATCH you need to use a body-parser
-// You can use the one used by JSON Server
-server.use(jsonServer.bodyParser);
-
-server.post("/FileUpload", upload.any(), function (req, res) {
+server.post('/FileUpload', upload.any(), function (req, res) {
 
   let filedata = req.files;
 
@@ -145,7 +142,8 @@ server.post('/saveURL', function (req, res) {
   const fileName = req.body.fileName;
 
   const db = router.db; //lowdb instance
-  const book = db.get(entityName).find({ id: entityId }).assign({ coverURL: `${urlBase}${fileName}` }).write();
+  const book = db.get(entityName).find({ id: entityId }).assign({ cover_url: `${urlBase}${fileName}` }).write();
+
   res.status(200).json(book);
 });
 

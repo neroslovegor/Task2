@@ -8,12 +8,12 @@ export default Controller.extend({
   
   dataService: service('data'),
   actions: {
-    async deleteBook(id) {
+    async deleteBook(book) {
       try {
-        await this.get('dataService').deleteBook(id);
+        await book.destroyRecord();
         this.send("sessionChanged");
       } catch (error) {
-        this.send('error', new Error('Connection failed'));
+        this.send('error', error);
       }
     },
 

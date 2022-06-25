@@ -19,7 +19,7 @@ export default Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-
+    
     this.setProperties({
       idBook: this.get('book.id') ? this.get('book.id') : undefined,
       title: this.get('book.title'),
@@ -29,5 +29,5 @@ export default Component.extend({
       descripURL: this.get('book.descripURL'),
       tags: this.get('book.tags')
     });
-  },
+  }
 });

@@ -10,14 +10,25 @@ export default Controller.extend({
 
       set(this, 'isUploadingFile', true);
       const uploadData = get(this, 'uploadData');
-      await this.get("dataService").createBook({
+      // await this.get("dataService").createBook({
+      //   title: this.get('title'),
+      //   author: this.get('author'),
+      //   pages: this.get('pages'),
+      //   descripURL: this.get('descripURL'),
+      //   tags: this.get('tags'),
+      //   coverURL: '',
+      // }, uploadData);
+
+      let newBook  = this.get('store').createRecord('book', {
         title: this.get('title'),
         author: this.get('author'),
         pages: this.get('pages'),
         descripURL: this.get('descripURL'),
         tags: this.get('tags'),
         coverURL: '',
-      }, uploadData);
+      });
+
+      await newBook.save()
 
       set(this, 'isUploadingFile', false);
       this.transitionToRoute('book.index');
@@ -25,14 +36,11 @@ export default Controller.extend({
     
     changeTags(newTags) {
       set(this, 'tags', [...newTags]);
-  
-      // eslint-disable-next-line no-console
-      console.log(get(this, 'tags'));
     },
   
     changeUploadData(uploadData) {
       set(this, 'uploadData', uploadData);
-    },
+    }
   },
 
   reset() {

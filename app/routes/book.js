@@ -13,10 +13,7 @@ export default Route.extend({
 
   dataService: service('data'),
   model({ search, tags_like }) {
-    if (search || tags_like) {
-      return this.get('dataService').getBooks(search, tags_like);
-    }
-    return this.get('dataService').getBooks();
+    return this.get('store').query('book', { q: search, tags_like: tags_like });
   },
 
   actions: {
