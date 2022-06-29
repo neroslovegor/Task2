@@ -10,7 +10,10 @@ export default Route.extend({
 
   dataService: service('data'),
   model({ search }) {
-    return this.get('store').query('speaker', { q: search });
+    if (search) {
+      return this.get('store').query('speaker', { q: search });
+    }
+    return this.get('store').findAll('speaker');
   },
 
   actions: {

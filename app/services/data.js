@@ -176,4 +176,38 @@ export default Service.extend({
             body: JSON.stringify(speaker)
         });
     },
+
+    async saveImg(uploadData, bookId) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                uploadData.url = `${config.fileUploadURL}`;
+                // uploadData.headers = getOwner(this).lookup('adapter:application').get('headers');
+                uploadData.submit().done(async (result/*, textStatus, jqXhr*/) => {
+                try {
+                    const dataToUpload = {
+                    coverURL: `/uploads/${result.filename}`
+                    };
+        
+                    await fetch(`${config.backendURL}/books/${bookId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dataToUpload)
+                    });
+        
+                    resolve();
+                }
+                catch (e) {
+                    reject(e);
+                }
+                }).fail((jqXhr, textStatus, errorThrown) => {
+                reject(errorThrown);
+                });    
+            }
+            catch (e) {
+                reject(e);
+            }
+        })
+    }
 });

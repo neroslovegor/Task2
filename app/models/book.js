@@ -8,4 +8,5 @@ export default DS.Model.extend({
   descripURL: DS.attr('string'),
   tags: DS.attr(),
   
+  reports: DS.hasMany('report')
 });

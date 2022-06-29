@@ -116,5 +116,52 @@
       "lastName": "Gonzales",
       "userId": 1
     }
+  ],
+  "meetings": [
+    {
+      "id": 1,
+      "date": "2022-06-01T00:00:00.000Z",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "date": "2022-06-02T00:00:00.000Z",
+      "userId": 1
+    }
+  ],
+  "reports": [
+    {
+      "id": 1,
+      "date": "2022-06-01T00:00:00.000Z",
+      "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "review": "",
+      "speakerId": 1,
+      "bookId": 1,
+      "meetingId": 1,
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "date": "2022-06-02T00:00:00.000Z",
+      "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "review": "",
+      "speakerId": 2,
+      "bookId": 2,
+      "meetingId": 1,
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "date": "2022-06-03T00:00:00.000Z",
+      "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "review": "",
+      "speakerId": 3,
+      "bookId": 3,
+      "meetingId": 2,
+      "userId": 1
+    }
   ]
 }

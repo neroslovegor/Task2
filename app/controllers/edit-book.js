@@ -10,15 +10,6 @@ export default Controller.extend({
 
       set(this, 'isUploadingFile', true);
       const uploadData = get(this, 'uploadData');
-      // await this.get("dataService").updateBook({
-      //   id: this.get('id'),
-      //   title: this.get('title'),
-      //   author: this.get('author'),
-      //   pages: this.get('pages'),
-      //   descripURL: this.get('descripURL'),
-      //   tags: this.get('tags'),
-      //   coverURL: this.get('coverURL')
-      // }, uploadData);
 
       this.get('model').setProperties({
         id: this.get('id'),
@@ -29,8 +20,14 @@ export default Controller.extend({
         tags: this.get('tags'),
         coverURL: this.get('coverURL')
       });
+
+      // let data = this.get('dataService');
+      // let uploadData = get(this, 'uploadData');
       
       await this.get('model').save();
+      // .then( function() {
+      //   data.saveImg(uploadData, this.get('id'))
+      // });
 
       set(this, 'isUploadingFile', false);
       this.transitionToRoute('book.index');

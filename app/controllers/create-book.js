@@ -10,14 +10,6 @@ export default Controller.extend({
 
       set(this, 'isUploadingFile', true);
       const uploadData = get(this, 'uploadData');
-      // await this.get("dataService").createBook({
-      //   title: this.get('title'),
-      //   author: this.get('author'),
-      //   pages: this.get('pages'),
-      //   descripURL: this.get('descripURL'),
-      //   tags: this.get('tags'),
-      //   coverURL: '',
-      // }, uploadData);
 
       let newBook = this.get('store').createRecord('book', {
         title: this.get('title'),
@@ -28,7 +20,13 @@ export default Controller.extend({
         coverURL: ''
       });
 
+      // let uploadData = get(this, 'uploadData');
+      // let data = this.get('dataService');
+
       await newBook.save();
+      // .then(function() {
+      //   data.saveImg(uploadData, newBook.id);
+      // });
 
       set(this, 'isUploadingFile', false);
       this.transitionToRoute('book.index');

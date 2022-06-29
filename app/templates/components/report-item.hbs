@@ -1,0 +1,47 @@
+<li class="list-group-item">
+  <div class="row h-100 justify-content-between">
+    <div class="col-md-2 text-center">
+      <h5 class="py-2">Спикер</h5>
+      <img src="images/speaker.jpg" class="rounded w-100" alt="Спикер">
+      <p>{{report.speaker.lastName}} {{report.speaker.firstName}}</p>
+    </div>
+    <div class="col-md-2 text-center">
+      <h5 class="py-2">Книга</h5>
+      <p>{{report.book.title}}</p>
+      <p>{{report.book.author}}</p>
+      <div class="row align-items-center m-0">
+        <div class="col-md-auto pl-0">
+          Оценка:
+        </div>
+        <div class="col p-0">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h5 class="text-center py-2">Отзыв</h5>
+      <p>
+        Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.
+      </p>
+    </div>
+    <div class="col-md-2 text-center col-filter">
+      <h5 class="py-2">Ссылки</h5>
+      <a href={{report.videoURL}} class="btn btn-video" title="Посмотреть запись доклада">
+        <svg viewBox="0 0 16 16" class="bi bi-camera-reels card-button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M0 8a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8zm11.5 5.175l3.5 1.556V7.269l-3.5 1.556v4.35zM2 7a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H2z"/>
+          <path fill-rule="evenodd" d="M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+          <path fill-rule="evenodd" d="M9 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+        </svg>
+      </a>
+      <a href={{report.presentationURL}} class="btn btn-present" title="Скачать презентацию">
+        <svg viewBox="0 0 16 16" class="bi bi-file-ppt card-button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M4 0h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H4z"/>
+          <path fill-rule="evenodd" d="M6 4a.5.5 0 0 1 .5.5V12a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 6 4z"/>
+          <path fill-rule="evenodd" d="M8.5 5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</li>
