@@ -4,9 +4,9 @@ import ApplicationSerializer from './application';
 export default ApplicationSerializer.extend({
   attrs: {
     reports: {
-      embedded: 'always'
-      // serialize: 'records',
-      // deserialize: 'records'
+      // embedded: 'always'
+      serialize: 'ids',
+      deserialize: 'records'
     }
   },
   

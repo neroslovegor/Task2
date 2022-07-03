@@ -1,25 +1,43 @@
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
+import { PER_PAGE } from '../controllers/meeting';
 
 export default Route.extend({
-  // queryParams: {
-  //   search: {
-  //     refreshModel: false 
-  //   },
-  //   tags_like: {
-  //     refreshModel: false
-  //   }
-  // },
+  queryParams: {
+    book: {
+      refreshModel: true 
+    },
+    speaker: {
+      refreshModel: true
+    },
+    dateMeeting: {
+      refreshModel: true
+    },
+    page: {
+      refreshModel: true
+    }
+  },
 
-  //dataService: service('data'),
-  model() {
-    //return this.get('store').findAll('meeting');
-    // return this.get('store').findAll('meeting');
+  model({ book, speaker, dateMeeting, page }) {
+    const query = {
+      _page: page,
+      _limit: PER_PAGE
+    };
+
+    if (book) {
+      query.book = book;
+    }
+    if (speaker) {
+      query.speaker = speaker;
+    }
+    if (dateMeeting) {
+      query.dateMeeting = dateMeeting;
+    }
+
     return RSVP.hash({
-      books: this.get('store').findAll('book'),
-      speakers: this.get('store').findAll('speaker'),
-      meetings: this.get('store').findAll('meeting')
-      //meetings: this.store.query('meeting', 'Ф')
+      books: this.store.findAll('book'),
+      speakers: this.store.findAll('speaker'),
+      meetings: this.store.query('meeting', query)
     });
   },
 
@@ -28,8 +46,8 @@ export default Route.extend({
       this.refresh();
     },
     
-    // loading() {
-    //   return false;
-    // }
+    loading() {
+      return false;
+    }
   }
 });

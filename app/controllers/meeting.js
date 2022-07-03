@@ -1,10 +1,15 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
+
+export const PER_PAGE = 3;
 
 export default Controller.extend({
-  // queryParams: ["search", "tags_like"],
-  // search: '',
-  // tags_like: '',
+  queryParams: ["book", "speaker", "dateMeeting", "page"],
+  book: '',
+  speaker: '',
+  dateMeeting: '',
+  page: 1,
   
   dataService: service('data'),
   actions: {
@@ -20,15 +25,42 @@ export default Controller.extend({
     changeBook(book) {
       this.set('selectedBook', book);
     },
-
     changeSpeaker(speaker) {
       this.set('selectedSpeaker', speaker);
     },
+    changeDate(selectedDate) {
+      this.set('selectedDate', selectedDate);
+    },
 
-    // searchUpdate() {
-    //   this.set('search', this.get('searchValue'));
-    //   this.set('tags_like', this.get('searchTag'));
-    //   this.send("sessionChanged");
-    // },
-  }
+    searchMeeting(selectedSpeaker, selectedBook) {
+      this.set('speaker', selectedSpeaker ? selectedSpeaker.id : '');
+      this.set('book', selectedBook ? selectedBook.id : '');
+      this.set('dateMeeting', this.get('selectedDate'));
+    },
+
+    clearSearch() {
+      this.set('speaker', '');
+      this.set('book', '');
+      this.set('dateMeeting', '');
+    }
+  },
+
+  selectedBook: computed('book', function() {
+    const book = this.get('book');
+    return book ? this.get('model.books').findBy('id', book) : null;
+  }),
+  selectedSpeaker: computed('speaker', function() {
+    const speaker = this.get('speaker');
+    return speaker ? this.get('model.speakers').findBy('id', speaker) : null;
+  }),
+  pages: computed('model.meetings.meta.total', function() {
+    const total = Number(this.get('model.meetings.meta.total'));
+    if (Number.isNaN(total) || total <= 0) {
+      return [];
+    }
+
+    return new Array(Math.ceil(total / PER_PAGE))
+      .fill()
+      .map((value, index) => index + 1);
+  })
 });
