@@ -19,6 +19,9 @@ Router.map(function() {
   this.route('create-meeting');
   this.route('edit-meeting', { path: '/meetings/:id/edit-meeting'});
 
+  this.route('create-report');
+  this.route('edit-report', { path: '/:id/edit-report'});
+
   this.route('404', { path: '*path'});
   this.route('error', { path: '/:error'});
 });

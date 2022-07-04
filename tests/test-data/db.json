@@ -120,19 +120,18 @@
   "meetings": [
     {
       "id": 1,
-      "dateMeeting": "2022-06-01T00:00:00+05:00",
+      "dateMeeting": "2022-06-01T00:00:00.000Z",
       "userId": 1
     },
     {
       "id": 2,
-      "dateMeeting": "2022-06-02T00:00:00+05:00",
+      "dateMeeting": "2022-06-02T00:00:00.000Z",
       "userId": 1
     }
   ],
   "reports": [
     {
       "id": 1,
-      "date": "2022-06-01T00:00:00.000Z",
       "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "",
@@ -143,7 +142,6 @@
     },
     {
       "id": 2,
-      "date": "2022-06-02T00:00:00.000Z",
       "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "",
@@ -154,7 +152,6 @@
     },
     {
       "id": 3,
-      "date": "2022-06-03T00:00:00.000Z",
       "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "",

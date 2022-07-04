@@ -35,9 +35,9 @@ export default Route.extend({
     }
 
     return RSVP.hash({
-      books: this.store.findAll('book'),
-      speakers: this.store.findAll('speaker'),
-      meetings: this.store.query('meeting', query)
+      books: this.get('store').findAll('book'),
+      speakers: this.get('store').findAll('speaker'),
+      meetings: this.get('store').query('meeting', query)
     });
   },
 

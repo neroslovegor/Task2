@@ -1,30 +1,24 @@
 /* eslint-disable no-console */
-const jsonServer = require('json-server');
-
-const jwt = require("jsonwebtoken");
-const crypto = require('crypto');
-
+// eslint-disable-next-line no-undef
+const jsonServer = require('json-server')
+// eslint-disable-next-line no-undef
 const path = require('path');
-const multer = require('multer'); //обработка файла на стороне сервера
+// eslint-disable-next-line no-undef
+const multer = require('multer');
+// eslint-disable-next-line no-undef
 const fs = require("fs");
-
+// eslint-disable-next-line no-undef
+const jwt = require("jsonwebtoken");
+// eslint-disable-next-line no-undef
+const crypto = require('crypto');
 const server = jsonServer.create()
 const router = jsonServer.router('./tests/test-data/db.json')
 const middlewares = jsonServer.defaults()
-
-const secretKey = '09f26e402586e2faa8da4c98a35f1b20d6b033c6097befa8be3486a829587fe2f90a832bd3ff9d42710a4da095a2ce285b009f0c3730cd9b8e1af3eb84df6611';
-const hashingSecret = "f844b09ff50c";
-
-// const RECAPTCHA_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
-// const RECAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
-
-const generateAccessToken = (userData) => {
-  // expires after half and hour (1800 seconds = 30 minutes)
-  return jwt.sign(userData, secretKey, { expiresIn: '1800s' });
-}
+const secretKey = '09f26e402586e2faa8da4c98a35f1b20d6b033c6097befa8be3486a829587ve2f90a832bd3ff9d42710a4da095a2ce6h5b009f0c3730cd9b8e1af3eb84df6611';
+const hashingSecret = "l529b09fc50c";
 
 const pathToSave = 'public/uploads';
-const urlBase = '/uploads/';
+const urlBase = '/public/';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if (!fs.existsSync(path.join(__dirname, pathToSave))) {
@@ -39,7 +33,12 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage }); // инициализация
+const upload = multer({ storage });
+
+const generateAccessToken = (userData) => {
+  // expires after half and hour (1800 seconds = 30 minutes)
+  return jwt.sign(userData, secretKey, { expiresIn: '1800s' });
+}
 
 const getErrors = (errorsToSend) => {
   let errors = [];
@@ -64,9 +63,8 @@ const getError = (title, detail, status, pathToAttribute) => {
   return getErrors(errors);
 };
 
-//////////////////////////////////////////////////////////////
-const getUnauthorizedError = () => getError('Login', 'You are not authorized, please log in', 401, null);
-const getForbiddenError = () => getError('Forbidden', 'You don\'t have permissions to this resource', 403, null);
+//const getUnauthorizedError = () => getError('Login', 'You are not authorized, please log in', 401, null);
+// const getForbiddenError = () => getError('Forbidden', 'You don\'t have permissions to this resource', 403, null);
 
 const getBaseRoute = (req) => {
   const path = req.path.split('/');
@@ -75,7 +73,7 @@ const getBaseRoute = (req) => {
 
 const isAuthorized = (req) => {
   const baseRoute = getBaseRoute(req);
-  if (req.path === '/recaptcha' || req.path === '/errors' || req.path === '/users' || req.path === '/token' || ((baseRoute === 'speakers' || baseRoute === 'books' || baseRoute === 'meetings') && req.method === 'GET')) {
+  if (req.path === '/FileUpload' || (baseRoute === 'meetings' && req.method === 'PATCH') || req.path === '/users' || req.path === '/token' || (req.path === '/logs' && req.method === 'POST') || ((baseRoute === 'speakers' || baseRoute === 'meetings' || baseRoute === 'meetings' || baseRoute === 'reports') && req.method === 'GET')) {
     return 200;
   }
 
@@ -95,8 +93,6 @@ const isAuthorized = (req) => {
     return 403;
   }
 };
-/////////////////////////////////////////////////////////////////////
-
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)
@@ -104,6 +100,12 @@ server.use(middlewares)
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser);
+
+// Adding IP adress of current request to log
+server.use('/logs', function (req, res, next) {
+  req.body.ipAdress = req.ip;
+  next();
+})
 
 server.post('/token', function (req, res) {
   const emailFromBody = req.body.email;
@@ -114,8 +116,7 @@ server.post('/token', function (req, res) {
   const user = db.get('users').find({ email: emailFromBody, password: hashedPassword }).value();
 
   if (user) {
-    // const token = generateAccessToken({ email: user.email, username: user.username });
-    const token = generateAccessToken({ email: user.email});
+    const token = generateAccessToken({ email: user.email, username: user.username });
     res.json({ token });
   }
   else {
@@ -123,7 +124,7 @@ server.post('/token', function (req, res) {
   }
 });
 
-server.post("/FileUpload", upload.any(), function (req, res) {
+server.post('/FileUpload', upload.any(), function (req, res) {
 
   let filedata = req.files;
 
@@ -146,24 +147,22 @@ server.post('/saveURL', function (req, res) {
   res.status(200).json(book);
 });
 
-//////////////////////////////////////////////////////////////////////////
-
 // Check authorization
-server.use((req, res, next) => {
-  const authorizeCode = isAuthorized(req);
-  if (authorizeCode === 200) {
-    next() // continue to JSON Server router
-  }
-  else if (authorizeCode === 401) {
-    res.status(401).json(getUnauthorizedError());
-  }
-  else if (authorizeCode === 403) {
-    res.status(403).json(getForbiddenError());
-  }
-  else {
-    res.status(403).json(getForbiddenError());
-  }
-});
+// server.use((req, res, next) => {
+//   const authorizeCode = isAuthorized(req);
+//   if (authorizeCode === 200) {
+//     next() // continue to JSON Server router
+//   }
+//   else if (authorizeCode === 401) {
+//     res.status(401).json(getUnauthorizedError());
+//   }
+//   else if (authorizeCode === 403) {
+//     res.status(403).json(getForbiddenError());
+//   }
+//   else {
+//     res.status(403).json(getForbiddenError());
+//   }
+// });
 
 // Get current user
 server.use((req, res, next) => {
@@ -174,11 +173,11 @@ server.use((req, res, next) => {
     }
     else {
       const db = router.db; //lowdb instance
-      const user = db.get('users').find({ email: storedUser.email }).value();
+      const user = db.get('users').find({ username: storedUser.username }).value();
       const userCopy = Object.assign({}, user);
 
       delete userCopy.password;
-      // delete userCopy.passwordConfirmation;
+      delete userCopy.passwordConfirmation;
       res.json(userCopy);
     }
   }
@@ -203,7 +202,7 @@ server.use((req, res, next) => {
     const userCopy = Object.assign({}, user);
 
     delete userCopy.password;
-    // delete userCopy.passwordConfirmation;
+    delete userCopy.passwordConfirmation;
     res.json(userCopy);
   }
   else {
@@ -212,25 +211,19 @@ server.use((req, res, next) => {
   }
 });
 
-/////Validate user to add///////////////////////////////////////////////////
+// Validate user to add
 server.use((req, res, next) => {
   const db = router.db; //lowdb instance
-  // const user = db.get('users').find({ username: req.body.username }).value();
-  const user = db.get('users').find({ email: req.body.email }).value();
+  const user = db.get('users').find({ username: req.body.username }).value();
 
-
-  // const valid = !req.body || req.body && !user;
   const valid = !req.body || req.body && !user;
-
   if (getBaseRoute(req) === 'users' && req.method === 'POST' && !valid) {
-    // res.status(422).json(getError('Username', 'username is already taken', 422, '/data/attributes/username'));
-    res.status(422).json(getError('Email', 'Email is already taken', 422, '/data/attributes/email'));
-
+    res.status(422).json(getError('Username', 'username is already taken', 422, '/data/attributes/username'));
   }
   else if (getBaseRoute(req) === 'users' && req.method === 'POST') {
     const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(req.body.password).digest('hex');
     req.body.password = hashedPassword;
-    // req.body.passwordConfirmation = hashedPassword;
+    req.body.passwordConfirmation = hashedPassword;
     next();
   }
   else {
@@ -239,26 +232,11 @@ server.use((req, res, next) => {
   }
 });
 
-// server.use(async (request, response, next) => {
-//   if (request.path === '/recaptcha' && request.query.key) {
-//     const { success } = await (await fetch(RECAPTCHA_VERIFY_URL, {
-//       method: 'POST',
-//       headers: { 'content-type': 'application/x-www-form-urlencoded' },
-//       body: `secret=${RECAPTCHA_SECRET}&response=${request.query.key}`,
-//     })).json();
-
-//     response.json({ success });
-//   } else {
-//     next();
-//   }
-// });
-
-//delete record begin////////////////////////////////////////////////
-
+//Adding IP to delete requests
 function responseInterceptor(req, res, next) {
   var originalSend = res.send;
 
-  res.send = function() {
+  res.send = function () {
     let body = arguments[0];
 
     if (req.method === 'DELETE') {
@@ -271,33 +249,51 @@ function responseInterceptor(req, res, next) {
       newBody.id = id;
       arguments[0] = JSON.stringify(newBody);
     }
+
     originalSend.apply(res, arguments);
   };
+
   next();
 }
 
 server.use(responseInterceptor);
-//delete record end
 
-server.use((request, response, next) => {
-  // let speaker = Number(request.query.speaker);
-  // let book = Number(request.query.book);
-  // let dateMeeting = request.query.dateMeeting;
+server.use((req, res, next) => {
+  const book = Number(req.query.book)
+  const speaker = Number(req.query.speaker)
+  if (req.method === 'GET' && req.path === '/meetings' && !Number.isNaN(book) || !Number.isNaN(speaker)) {
+    const meetingsList = []
+    let reports = []
+    if (!Number.isNaN(book) && !Number.isNaN(speaker)) {
+      reports = router.db.get('reports').filter((r) => r.bookId === book && r.speakerId === speaker).value()
+    } else {
+      reports = router.db.get('reports').filter((r) => r.bookId === book || r.speakerId === speaker).value()
+    }
+    // Making filter on each report to get the right meeting, then filtering on embedded reports to return embedded data
+    reports.filter(function(report) {
+      const meetings = router.db.get('meetings').filter((m) => m.id === report.meetingId).map((meeting) => {
+        meeting.reports = router.db.get('reports').filter((r) => r.meetingId === meeting.id).value()
 
-  if (request.method === 'GET' && request.path === '/meetings') {
-    let speaker = Number(request.query.speaker);
-    let book = Number(request.query.book);
-    let dateMeeting = request.query.dateMeeting;
-
-    if (Number.isNaN(speaker)) { speaker = 'all'}
-    if (Number.isNaN(book)) { book = 'all'}
-    if (dateMeeting === undefined || dateMeeting === 'Invalid date') { dateMeeting = 'all'}
-
-    const arr = router.db.get('reports').filter(report => (report.speakerId === speaker || speaker === "all") && (report.bookId === book || book === "all")).value();
-    const mapArr = arr.map(report => report.meetingId);
-    const newMeetings = router.db.get('meetings').filter( meeting => (mapArr.some(el => meeting.id === el)) && (meeting.dateMeeting === dateMeeting || dateMeeting === "all")).value();
-    newMeetings.forEach((newMeeting) => newMeeting.reports = arr.filter((report) => report.meetingId === newMeeting.id));
-    response.json(newMeetings);
+        return meeting;
+      }).value();
+      meetingsList.push(meetings[0])
+    });
+    // to Get rid of meeting duplicates we making mapping and filtering below
+    let ids = meetingsList.map(o => o.id) 
+    const filteredMeetingList = meetingsList.filter(({id}, index) => !ids.includes(id, index + 1));
+    // Adding links to response so pagination buttons gonna appear on response
+    res.links({
+      first: `http://localhost:3000/meetings?_embed=reports&_limit=${req.query._limit}&_page=1`,
+      prev: `http://localhost:3000/meetings?_embed=reports&_limit=${req.query._limit}&_page=2`,
+      next: `http://localhost:3000/meetings?_embed=reports&_limit=${req.query._limit}&_page=3`,
+      last: `http://localhost:3000/meetings?_embed=reports&_limit=${req.query._limit}&_page=4`
+    })
+    // Adding headers for the same purposes
+    res.setHeader('Access-Control-Expose-Headers', 'X-Total-Count, Link');
+    res.setHeader('Transfer-Encoding', 'chunked');
+    res.setHeader('X-Total-Count', `${filteredMeetingList.length}`);
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.json(filteredMeetingList);
   } else {
     next();
   }

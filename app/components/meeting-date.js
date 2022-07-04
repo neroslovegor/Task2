@@ -11,7 +11,8 @@ export default Component.extend({
       clearBtn: true,
       format: "dd.mm.yyyy",
       language: "ru",
-      autoclose: true
+      autoclose: true,
+      orientation: 'bottom'
     });
 
     const self = this;

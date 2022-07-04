@@ -31,7 +31,7 @@ export default Controller.extend({
     changeDate(selectedDate) {
       this.set('selectedDate', selectedDate);
     },
-
+    
     searchMeeting(selectedSpeaker, selectedBook) {
       this.set('speaker', selectedSpeaker ? selectedSpeaker.id : '');
       this.set('book', selectedBook ? selectedBook.id : '');

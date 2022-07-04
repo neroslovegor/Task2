@@ -14,6 +14,6 @@ export default Controller.extend({
   },
 
   reset() {
-    set(this, 'date', '');
+    set(this, 'dateMeeting', '');
   }
 });

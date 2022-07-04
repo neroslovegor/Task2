@@ -15,6 +15,6 @@ export default Controller.extend({
 
   reset() {
     set(this, 'id', this.get('model.id'));
-    set(this, 'date', this.get('model.date'));
+    set(this, 'dateMeeting', this.get('model.dateMeeting'));
   }
 });

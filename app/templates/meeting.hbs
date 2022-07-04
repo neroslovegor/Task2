@@ -12,15 +12,13 @@
 			<div class="col-md-3 align-top">
 				<h5>Спикер</h5>
 				{{#power-select class="selectpicker form-control dropdown-filter-control" title="Спикер..." allowClear=true onchange=(action "changeSpeaker") options=model.speakers selected=selectedSpeaker searchField="fullName" as |speaker|}}
-				{{speaker.fullName}}
-				{{!-- <select class="selectpicker form-control dropdown-filter-control" data-live-search="true" data-size="5" title="Спикер..."></select> --}}
+					{{speaker.fullName}}
 				{{/power-select}}
 			</div>
 			<div class="col-md-3">
 				<h5>Книга</h5>
 				{{#power-select class="selectpicker form-control dropdown-filter-control" title="Книга..." allowClear=true onchange=(action "changeBook") options=model.books selected=selectedBook searchField="title" as |book|}}
-				{{book.title}}
-				{{!-- <select class="selectpicker form-control dropdown-filter-control" data-live-search="true" data-size="5" title="Книга..."></select> --}}
+					{{book.title}}
 				{{/power-select}}
 			</div>
 			<div class="col-md-3">
