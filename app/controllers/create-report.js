@@ -6,8 +6,18 @@ import { computed } from '@ember/object';
 export default Controller.extend({
    dataService: service('data'),
   actions: {
-    async createReport(report) {
-      let newReport = this.get('store').createRecord('report', report);
+    async createReport(e, meetingId, dateReport) {
+      e.preventDefault();
+
+      let newReport = this.get('store').createRecord('report', {
+        dateReport: dateReport,
+        presentationURL: this.get('presentationURL'),
+        videoURL: this.get('videoURL'),
+        review: this.get('review'),
+        speakerId: this.get('selectedSpeaker').id,
+        bookId: this.get('selectedBook').id,
+        meetingId: meetingId
+      });
       await newReport.save();
       history.back();
 
@@ -20,6 +30,11 @@ export default Controller.extend({
     changeSpeaker(speaker) {
       this.set('selectedSpeaker', speaker);
     },
+
+    goBack() {
+      history.back();
+      return false;
+    }
   },
 
   // reset() {
