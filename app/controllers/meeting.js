@@ -12,6 +12,7 @@ export default Controller.extend({
   page: 1,
   
   dataService: service('data'),
+  session: service(),
   actions: {
     async deleteMeeting(meeting) {
       try {
@@ -28,8 +29,8 @@ export default Controller.extend({
     changeSpeaker(speaker) {
       this.set('selectedSpeaker', speaker);
     },
-    changeDate(selectedDate) {
-      this.set('selectedDate', selectedDate);
+    changeDate(dateMeeting) {
+      this.set('selectedDate', dateMeeting);
     },
     
     searchMeeting(selectedSpeaker, selectedBook) {

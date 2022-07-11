@@ -15,7 +15,9 @@ export default DS.JSONSerializer.extend({
   },
 
   extractRelationship(relationshipModelName, relationshipHash) {
-    return this._super(...arguments);
+    let hash = relationshipHash.id ? relationshipHash.id : relationshipHash;
+    return this._super.call(this, relationshipModelName, hash);
+    //return this._super(...arguments);
   },
 
   serializeBelongsTo(snapshot, json, relationship) {

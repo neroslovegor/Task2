@@ -1,21 +1,12 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line no-undef
 const jsonServer = require('json-server')
-// eslint-disable-next-line no-undef
 const path = require('path');
-// eslint-disable-next-line no-undef
 const multer = require('multer');
-// eslint-disable-next-line no-undef
 const fs = require("fs");
-// eslint-disable-next-line no-undef
-const jwt = require("jsonwebtoken");
-// eslint-disable-next-line no-undef
 const crypto = require('crypto');
-const server = jsonServer.create()
-const router = jsonServer.router('./tests/test-data/db.json')
-const middlewares = jsonServer.defaults()
-const secretKey = '09f26e402586e2faa8da4c98a35f1b20d6b033c6097befa8be3486a829587ve2f90a832bd3ff9d42710a4da095a2ce6h5b009f0c3730cd9b8e1af3eb84df6611';
-const hashingSecret = "l529b09fc50c";
+const jwt = require("jsonwebtoken");
+const fetch = require('node-fetch');
 
 const pathToSave = 'public/uploads';
 const urlBase = '/public/';
@@ -34,6 +25,17 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+const server = jsonServer.create()
+const router = jsonServer.router('./tests/test-data/db.json')
+const middlewares = jsonServer.defaults()
+const secretKey = '09f26e402586e2faa8da4c98a35f1b20d6b033c6097befa8be3486a829587ve2f90a832bd3ff9d42710a4da095a2ce6h5b009f0c3730cd9b8e1af3eb84df6611';
+//const hashingSecret = "f844b09ff50c";
+const hashingSecret = "da0e6deb4bb9";
+
+const RECAPTCHA_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
+const RECAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+
 
 const generateAccessToken = (userData) => {
   // expires after half and hour (1800 seconds = 30 minutes)
@@ -63,8 +65,8 @@ const getError = (title, detail, status, pathToAttribute) => {
   return getErrors(errors);
 };
 
-//const getUnauthorizedError = () => getError('Login', 'You are not authorized, please log in', 401, null);
-// const getForbiddenError = () => getError('Forbidden', 'You don\'t have permissions to this resource', 403, null);
+const getUnauthorizedError = () => getError('Login', 'You are not authorized, please log in', 401, null);
+const getForbiddenError = () => getError('Forbidden', 'You don\'t have permissions to this resource', 403, null);
 
 const getBaseRoute = (req) => {
   const path = req.path.split('/');
@@ -73,7 +75,8 @@ const getBaseRoute = (req) => {
 
 const isAuthorized = (req) => {
   const baseRoute = getBaseRoute(req);
-  if (req.path === '/FileUpload' || (baseRoute === 'meetings' && req.method === 'PATCH') || req.path === '/users' || req.path === '/token' || (req.path === '/logs' && req.method === 'POST') || ((baseRoute === 'speakers' || baseRoute === 'meetings' || baseRoute === 'meetings' || baseRoute === 'reports') && req.method === 'GET')) {
+  //if (req.path === '/FileUpload' || (baseRoute === 'meetings' && req.method === 'PATCH') || req.path === '/users' || req.path === '/token' || (req.path === '/logs' && req.method === 'POST') || ((baseRoute === 'speakers' || baseRoute === 'meetings' || baseRoute === 'meetings' || baseRoute === 'reports') && req.method === 'GET')) {
+  if (req.path === '/recaptcha' || req.path === '/errors' || req.path === '/users' || req.path === '/token' || ((baseRoute === 'speakers' || baseRoute === 'books' || baseRoute === 'meetings' || baseRoute === 'reports') && req.method === 'GET')) {  
     return 200;
   }
 
@@ -102,10 +105,10 @@ server.use(middlewares)
 server.use(jsonServer.bodyParser);
 
 // Adding IP adress of current request to log
-server.use('/logs', function (req, res, next) {
-  req.body.ipAdress = req.ip;
-  next();
-})
+// server.use('/logs', function (req, res, next) {
+//   req.body.ipAdress = req.ip;
+//   next();
+// })
 
 server.post('/token', function (req, res) {
   const emailFromBody = req.body.email;
@@ -116,11 +119,28 @@ server.post('/token', function (req, res) {
   const user = db.get('users').find({ email: emailFromBody, password: hashedPassword }).value();
 
   if (user) {
-    const token = generateAccessToken({ email: user.email, username: user.username });
+    const token = generateAccessToken({ email: user.email });
     res.json({ token });
   }
   else {
     res.status(401).json(getError('Login', 'Error logging in user with that e-mail and password', 401, null));
+  }
+});
+
+// Check authorization
+server.use((req, res, next) => {
+  const authorizeCode = isAuthorized(req);
+  if (authorizeCode === 200) {
+    next() // continue to JSON Server router
+  }
+  else if (authorizeCode === 401) {
+    res.status(401).json(getUnauthorizedError());
+  }
+  else if (authorizeCode === 403) {
+    res.status(403).json(getForbiddenError());
+  }
+  else {
+    res.status(403).json(getForbiddenError());
   }
 });
 
@@ -147,23 +167,6 @@ server.post('/saveURL', function (req, res) {
   res.status(200).json(book);
 });
 
-// Check authorization
-// server.use((req, res, next) => {
-//   const authorizeCode = isAuthorized(req);
-//   if (authorizeCode === 200) {
-//     next() // continue to JSON Server router
-//   }
-//   else if (authorizeCode === 401) {
-//     res.status(401).json(getUnauthorizedError());
-//   }
-//   else if (authorizeCode === 403) {
-//     res.status(403).json(getForbiddenError());
-//   }
-//   else {
-//     res.status(403).json(getForbiddenError());
-//   }
-// });
-
 // Get current user
 server.use((req, res, next) => {
   if (req.path === '/users/me' && req.method === 'GET') {
@@ -173,11 +176,11 @@ server.use((req, res, next) => {
     }
     else {
       const db = router.db; //lowdb instance
-      const user = db.get('users').find({ username: storedUser.username }).value();
+      const user = db.get('users').find({ email: storedUser.email }).value();
       const userCopy = Object.assign({}, user);
 
       delete userCopy.password;
-      delete userCopy.passwordConfirmation;
+      //delete userCopy.passwordConfirmation;
       res.json(userCopy);
     }
   }
@@ -202,7 +205,7 @@ server.use((req, res, next) => {
     const userCopy = Object.assign({}, user);
 
     delete userCopy.password;
-    delete userCopy.passwordConfirmation;
+    //delete userCopy.passwordConfirmation;
     res.json(userCopy);
   }
   else {
@@ -214,20 +217,36 @@ server.use((req, res, next) => {
 // Validate user to add
 server.use((req, res, next) => {
   const db = router.db; //lowdb instance
-  const user = db.get('users').find({ username: req.body.username }).value();
+  const user = db.get('users').find({ email: req.body.email }).value();
+
 
   const valid = !req.body || req.body && !user;
   if (getBaseRoute(req) === 'users' && req.method === 'POST' && !valid) {
-    res.status(422).json(getError('Username', 'username is already taken', 422, '/data/attributes/username'));
+    res.status(422).json(getError('Email', 'Email is already taken', 422, '/data/attributes/email'));
+
   }
   else if (getBaseRoute(req) === 'users' && req.method === 'POST') {
     const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(req.body.password).digest('hex');
     req.body.password = hashedPassword;
-    req.body.passwordConfirmation = hashedPassword;
+    //req.body.passwordConfirmation = hashedPassword;
     next();
   }
   else {
     // Continue to JSON Server router
+    next();
+  }
+});
+
+server.use(async (request, response, next) => {
+  if (request.path === '/recaptcha' && request.query.key) {
+    const { success } = await (await fetch(RECAPTCHA_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      body: `secret=${RECAPTCHA_SECRET}&response=${request.query.key}`,
+    })).json();
+
+    response.json({ success });
+  } else {
     next();
   }
 });

@@ -143,7 +143,7 @@
     },
     {
       "id": 2,
-      "dateReport": "2022-06-02T00:00:00.000Z",
+      "dateReport": "2022-06-01T00:00:00.000Z",
       "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "",
@@ -154,7 +154,7 @@
     },
     {
       "id": 3,
-      "dateReport": "2022-06-03T00:00:00.000Z",
+      "dateReport": "2022-06-02T00:00:00.000Z",
       "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "",
@@ -162,34 +162,18 @@
       "bookId": 3,
       "meetingId": 2,
       "userId": 1
+    }
+  ],
+  "users": [
+    {
+      "email": "admin@admin.ru",
+      "password": "a5a94d3b46573d91e82d59395f00faa279be7e2d28661ad524e6a394075bc6a0",
+      "id": 1
     },
     {
-      "dateReport": null,
-      "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "review": "123",
-      "id": 4
-    },
-    {
-      "dateReport": null,
-      "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "review": "123",
-      "id": 5
-    },
-    {
-      "dateReport": null,
-      "presentationURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "videoURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "review": "123",
-      "id": 6
-    },
-    {
-      "dateReport": null,
-      "presentationURL": null,
-      "videoURL": null,
-      "review": null,
-      "id": 7
+      "email": "a@a.ru",
+      "password": "088bbe20a217736c7d4bd7d117ed8c0c1b6ff50f70fe6119351be6ca51bdf629",
+      "id": 2
     }
   ]
 }

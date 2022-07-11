@@ -242,13 +242,13 @@ a.tag-link:hover {
 }
 
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
+  margin-bottom: 0px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -395,6 +395,19 @@ a.card .card-body {
   }
 }
 
+.validate-message {
+  color: red;
+  background-color: #fce4e4;
+  border: 1px solid #fcc2c3;
+  border-radius: 3px;
+  float: left;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.language-select {
+  margin-right: 10px;
+}
 /* Loading styles
 -------------------------------------------------- */
 //*

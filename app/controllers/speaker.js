@@ -6,6 +6,7 @@ export default Controller.extend({
   search: '',
 
   dataService: service('data'),
+  session: service(),
   actions: {
     async deleteSpeaker(speaker) {
       try {

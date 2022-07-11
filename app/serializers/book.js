@@ -5,7 +5,7 @@ export default ApplicationSerializer.extend({
   attrs: {
     reports: {
       // embedded: 'always'
-      serialize: 'ids',
+      serialize: false,
       deserialize: 'records'
     }
   },

@@ -1,0 +1,36 @@
+<form onsubmit={{action "login"}}>
+  <img class="mb-4" src="{{env 'rootURL'}}images/logo-dark.png" alt="" height="57">
+  <h1 class="h3 mb-3 fw-normal">Вход</h1>
+
+  <div class="form-floating">
+    {{input type="email" class="form-control" placeholder="name@example.com" value=email}}
+    {{#if (and isInvalid (v-get this 'email' 'isInvalid'))}}
+      <span class="validate-message">
+        {{v-get this 'email' 'message'}}
+      </span>
+    {{/if}}
+  </div>
+
+  <div class="form-floating">
+    {{input type="password" class="form-control" placeholder="Пароль" value=password}}
+    {{#if (and isInvalid (v-get this 'password' 'isInvalid'))}}
+      <span class="validate-message">
+        {{v-get this 'password' 'message'}}
+      </span>
+    {{/if}}
+  </div>
+
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> Запомнить
+    </label>
+  </div>
+
+  {{#each errors as |error|}}
+    <span class="validate-message">{{error.detail}}</span>
+  {{/each}}
+
+  <button class="w-100 btn btn-lg btn-primary mb-3" type="submit" href="index">Войти</button>
+  <a class="w-100" style="text-decoration: none" onclick={{action "goBack"}}>Назад</a>
+  {{!-- {{#link-to "index" class="w-100"}}Назад{{/link-to}} --}}
+</form>

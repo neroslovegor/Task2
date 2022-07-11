@@ -13,6 +13,9 @@ export default Component.extend({
 
     changeDate(selectedDate) {
       this.set('selectedDate', selectedDate);
+    },
+    sessionChanged: function() {
+      this.refresh();
     }
   },
 

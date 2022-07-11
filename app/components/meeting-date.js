@@ -9,8 +9,8 @@ export default Component.extend({
 
     this.$('.datepicker').datepicker({
       clearBtn: true,
-      //format: "dd.mm.yyyy",
-      format: "mm.dd.yyyy",
+      format: "dd.mm.yyyy",
+      //format: "mm.dd.yyyy",
       language: "ru",
       autoclose: true,
       orientation: 'bottom'

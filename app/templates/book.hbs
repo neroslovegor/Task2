@@ -3,11 +3,13 @@
     <h2 class="text-center">Книги</h2>
     <div class="form-row navbar-panel justify-content-between">
       <div class="col-md-auto">
-        {{#link-to "create-book" class="btn btn-outline-primary my-2" type="button" title="Добавить книгу"}} 
-          <svg viewBox="0 0 16 16" class="bi bi-plus card-button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-          </svg>
-        {{/link-to}}
+        {{#if (can "create book")}}
+          {{#link-to "create-book" class="btn btn-outline-primary my-2" type="button" title="Добавить книгу"}} 
+            <svg viewBox="0 0 16 16" class="bi bi-plus card-button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+          {{/link-to}}
+        {{/if}}
       </div>
       <div class="col-md-auto">
         <form class="form-inline">

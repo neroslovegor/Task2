@@ -7,6 +7,7 @@ export default Controller.extend({
   tags_like: '',
   
   dataService: service('data'),
+  session: service(),
   actions: {
     async deleteBook(book) {
       try {

@@ -10,5 +10,6 @@ export default DS.Model.extend({
     return `${this.get('lastName')} ${this.get('firstName')} ${this.get('middleName')}`;
   }),
 
-  reports: DS.hasMany('report')
+  reports: DS.hasMany('report'),
+  user: DS.belongsTo('user')
 });
