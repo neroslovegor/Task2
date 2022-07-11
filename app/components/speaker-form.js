@@ -1,16 +1,39 @@
 import Component from '@ember/component';
+import { get, set } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default Component.extend({
+const Validations = buildValidations({
+  firstName: [
+    validator('ds-error'),
+    validator('presence', true),
+  ],
+  middleName: [
+    validator('ds-error'),
+    validator('presence', true),
+  ],
+  lastName: [
+    validator('ds-error'),
+    validator('presence', true),
+  ],
+});
+
+export default Component.extend(Validations, {
+  currentUser: service(),
+
   actions: {
     submitForm(e) {
       e.preventDefault();
-
-      this.onsubmit({
-        id: this.get('idSpeaker'),
-        firstName: this.get('firstName'),
-        middleName: this.get('middleName'),
-        lastName: this.get('lastName')
-      });
+      set(this, 'isInvalid', !this.get('validations.isValid'));
+        if (!get(this, 'isInvalid')) {
+        this.onsubmit({
+          id: this.get('idSpeaker'),
+          firstName: this.get('firstName'),
+          middleName: this.get('middleName'),
+          lastName: this.get('lastName'),
+          user: this.get('currentUser.user')
+        });
+      }
     }
   },
 

@@ -1,19 +1,61 @@
 import Component from '@ember/component';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default Component.extend({
+const Validations = buildValidations({
+  title: [
+    validator('ds-error'),
+    validator('presence', true),
+  ],
+  author: [
+    validator('ds-error'),
+    validator('presence', true),
+  ],
+  pages: [
+    validator('ds-error'),
+    validator('presence', true),
+    validator('number', {
+      allowString: true,
+      integer: true,
+    })
+  ],
+  descripURL: [
+    validator('ds-error'),
+    validator('presence', true),
+    validator('format', {
+      type: 'url'
+    })
+  ],
+  tags: [
+    validator('ds-error'),
+    validator('presence', true),
+  ],
+});
+
+export default Component.extend(Validations, {
   actions: {
     submitForm(e) {
       e.preventDefault();
 
-      this.onsubmit({
-        id: this.get('idBook'),
-        title: this.get('title'),
-        author: this.get('author'),
-        pages: this.get('pages'),
-        coverURL: this.get('coverURL'),
-        descripURL: this.get('descripURL'),
-        tags: this.get('tags')
-      });
+      set(this, 'isInvalid', !this.get('validations.isValid'));
+      if (!get(this, 'isInvalid')) {
+
+        this.onsubmit({
+          id: this.get('idBook'),
+          title: this.get('title'),
+          author: this.get('author'),
+          pages: this.get('pages'),
+          coverURL: this.get('coverURL'),
+          descripURL: this.get('descripURL'),
+          tags: this.get('tags')
+        });
+      }
+    },
+
+    changeUploadData(uploadData) {
+      set(this, 'uploadData', uploadData);
+    },
+    changeTags(newTags) {
+      set(this, 'tags', [...newTags]);
     },
   },
 
