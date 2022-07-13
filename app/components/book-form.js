@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { validator, buildValidations } from 'ember-cp-validations';
+import { get, set } from '@ember/object';
 
 const Validations = buildValidations({
   title: [

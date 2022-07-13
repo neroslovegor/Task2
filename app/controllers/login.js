@@ -19,20 +19,14 @@ export default Controller.extend({
     },
 
     error(error, transition) {
-
-      // const applicationError = get(this, 'applicationError');// error logger
-      // applicationError.saveError('Error in login user')
+      const applicationError = get(this, 'applicationError');
+      applicationError.errorLog('Error logging in user with that e-mail and password');
 
       if (error instanceof Error) {
         return true;
       }
       this.set('errors', error.json.errors);
-      // this.set('errors', error.errors);
       return false;
     }
-  },
-
-  resetErrors() {
-    this.set('errors', {});
   }
 });

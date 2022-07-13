@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { debounce } from '@ember/runloop';
 
 export default Controller.extend({
   queryParams: ["search"],
@@ -21,5 +22,11 @@ export default Controller.extend({
       this.set('search', this.get('searchValue'));
       this.send("sessionChanged");   
     },
+
+    searchSpeaker() {
+      debounce(() => {
+        this.set("search", this.get("searchValue"));
+      }, 2000);
+    }
   }
 });

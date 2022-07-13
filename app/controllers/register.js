@@ -1,4 +1,6 @@
 import Controller from '@ember/controller';
+import { get } from '@ember/object';
+
 
 export default Controller.extend({
   actions: {
@@ -11,19 +13,8 @@ export default Controller.extend({
         this.transitionToRoute('index');
       }
       catch(e) {
-        e.user = newUser;
         this.send('error', e);
       }
-    },
-
-    error(error, transition) {
-      //this.set('errors', error.user.errors);
-      this.set('errors', error);
-      return false;
     }
-  },
-
-  resetErrors() {
-    this.set('errors', {});
   }
 });

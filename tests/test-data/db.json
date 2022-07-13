@@ -176,5 +176,14 @@
       "password": "088bbe20a217736c7d4bd7d117ed8c0c1b6ff50f70fe6119351be6ca51bdf629",
       "id": 2
     }
+  ],
+  "errors": [
+    {
+      "dateError": "2022-07-13T08:32:54.339Z",
+      "ip": "46.146.68.58",
+      "url": "http://localhost:4200/login",
+      "text": "Error logging in user with that e-mail and password",
+      "id": 1
+    }
   ]
 }
